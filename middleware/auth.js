@@ -16,7 +16,7 @@ const authentication = async (req, res, next) => {
       return res.json("verifyed" + false);
     }
     const user = await userModel.find({ email: verified.email });
-    console.log("user" + user);
+    // console.log("user" + user);
     if (!user) {
       return res.json("user" + false);
     }

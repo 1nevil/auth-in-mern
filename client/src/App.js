@@ -1,6 +1,5 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useState, useEffect } from "react";
 import Header from "./components/layout/Header";
 import Home from "./components/screen/Home";
 import AllUsers from "./components/screen/AllUsers";

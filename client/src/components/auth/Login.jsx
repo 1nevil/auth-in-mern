@@ -4,7 +4,7 @@ import Container from "react-bootstrap/esm/Container";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
@@ -12,6 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     if (email === "" || password === "" || passwordCheck === "") {
@@ -28,8 +29,8 @@ const Login = () => {
         if (res.data) {
           localStorage.setItem("token", res.data);
           alert("login");
-          // navigate("/");
-          window.location.href = "/";
+          navigate("/");
+          // window.location.href = "/";
         } else {
           alert("email and pass");
         }

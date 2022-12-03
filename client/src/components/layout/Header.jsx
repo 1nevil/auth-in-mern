@@ -1,13 +1,17 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 
 const Header = () => {
+  const navigate = useNavigate();
+  useEffect(() => {}, [navigate]);
+
   const handleLogout = () => {
     localStorage.clear();
-    window.location.reload(true);
+    // window.location.reload(true);
+    navigate("/login");
   };
   return (
     <>
