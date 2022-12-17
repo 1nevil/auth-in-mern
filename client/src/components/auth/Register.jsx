@@ -8,6 +8,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Register = () => {
+  const emailRegex =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,14 +29,21 @@ const Register = () => {
       setError("Every feild is required");
     } else if (password !== passwordCheck) {
       setError("Password and Check password must be same");
+    } else if (!emailRegex.test(email)) {
+      setError("Enter the valid email");
     } else {
       setError("");
-      await axios.post("/users/register", {
+      const res = await axios.post("http://localhost:5000/users/register", {
         user,
         email,
         password,
       });
-      navigate("/login");
+      console.log(res.data.message);
+      if (res.data.message) {
+        setError(res.data.message);
+      } else {
+        navigate("/login");
+      }
     }
   };
   const handleReset = () => {

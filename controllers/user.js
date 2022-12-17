@@ -15,8 +15,13 @@ const getAllUser = async (req, res) => {
 
 const register = async (req, res) => {
   const { user, email, password } = req.body;
-  // console.log(req.body);
   try {
+    // console.log(req.body);
+    const exist = await userModel.find({ email: email });
+    console.log(exist);
+    if (exist) {
+      return res.json({ message: "you are already an user" });
+    }
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
     const newUser = new userModel({
@@ -24,6 +29,7 @@ const register = async (req, res) => {
       email,
       password: hashedPassword,
     });
+
     // console.log(salt);  sdfasdfasdfadfadsf <- salt
     // console.log(hashedPassword); sdfasdfasdfadfadsf + zsdfsdffdDfDFSD <- password
     await newUser.save();

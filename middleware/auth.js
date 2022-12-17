@@ -18,8 +18,9 @@ const authentication = async (req, res, next) => {
     const user = await userModel.find({ email: verified.email });
     // console.log("user" + user);
     if (!user) {
-      return res.json("user" + false);
+      return res.json({ messag: "user is not found" });
     }
+    req.user = user;
     // return res.json(true);
     next();
   } catch (err) {

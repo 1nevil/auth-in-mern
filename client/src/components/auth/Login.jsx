@@ -27,10 +27,8 @@ const Login = () => {
           password,
         });
         if (res.data) {
-          localStorage.setItem("token", res.data);
-          alert("login");
+          localStorage.setItem("token", res.data);  
           navigate("/");
-          // window.location.href = "/";
         } else {
           alert("email and pass");
         }
